@@ -36,7 +36,9 @@ def prob_at_least_k_defaults(n_loans: int, p_default: float, k: int) -> float:
     return float(pmf[k:].sum())
 
 
-def expected_credit_loss(n_loans: int, p_default: float, ead: float, lgd: float) -> float:
+def expected_credit_loss(
+    n_loans: int, p_default: float, ead: float, lgd: float
+) -> float:
     """Expected credit loss of n_loans identical loans: n * PD * EAD * LGD."""
     check_count(n_loans, "n_loans")
     check_probability(p_default, "p_default")

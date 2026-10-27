@@ -8,7 +8,7 @@ TWO_REGIMES = {
     "bad": {"prob": 0.2, "p_default": 0.06, "p_up": 0.46},
 }
 INDEPENDENT = {"all": {"prob": 1.0, "p_default": 0.02, "p_up": 0.5}}
-PORTFOLIO = dict(n_loans=100, ead=10_000, lgd=0.45, position_value=100_000, n_days=250)
+PORTFOLIO = {"n_loans": 100, "ead": 10_000, "lgd": 0.45, "position_value": 100_000, "n_days": 250}
 
 
 def test_expected_credit_loss_close_to_9000():
@@ -17,8 +17,12 @@ def test_expected_credit_loss_close_to_9000():
 
 
 def test_regimes_fatten_the_tail():
-    var_ind = risk_metrics(simulate_bank_losses(INDEPENDENT, **PORTFOLIO, seed=42)["credit"])["VaR"]
-    var_reg = risk_metrics(simulate_bank_losses(TWO_REGIMES, **PORTFOLIO, seed=42)["credit"])["VaR"]
+    var_ind = risk_metrics(
+        simulate_bank_losses(INDEPENDENT, **PORTFOLIO, seed=42)["credit"]
+    )["VaR"]
+    var_reg = risk_metrics(
+        simulate_bank_losses(TWO_REGIMES, **PORTFOLIO, seed=42)["credit"]
+    )["VaR"]
     assert var_reg > var_ind
 
 

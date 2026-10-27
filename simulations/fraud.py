@@ -20,7 +20,10 @@ def posterior_fraud_given_alarm(
 
 
 def expected_alarm_counts(
-    n_transactions: int, prevalence: float, sensitivity: float, false_positive_rate: float
+    n_transactions: int,
+    prevalence: float,
+    sensitivity: float,
+    false_positive_rate: float,
 ) -> dict[str, float]:
     """Expected counts in each cell of the fraud-alarm confusion matrix."""
     check_count(n_transactions, "n_transactions")
